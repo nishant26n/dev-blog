@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import moment from "moment";
+import { CopyBlock, dracula } from "react-code-blocks";
 
 const PostDetails = ({ post }) => {
   const getContentFragment = (index, text, obj, type) => {
@@ -21,6 +22,14 @@ const PostDetails = ({ post }) => {
     }
 
     switch (type) {
+      case "heading-two":
+        return (
+          <h2 key={index} className="text-xl font-semibold mb-4">
+            {modifiedText.map((item, i) => (
+              <React.Fragment key={i}>{item}</React.Fragment>
+            ))}
+          </h2>
+        );
       case "heading-three":
         return (
           <h3 key={index} className="text-xl font-semibold mb-4">
@@ -37,6 +46,7 @@ const PostDetails = ({ post }) => {
             ))}
           </p>
         );
+
       case "heading-four":
         return (
           <h4 key={index} className="text-md font-semibold mb-4">
@@ -44,6 +54,21 @@ const PostDetails = ({ post }) => {
               <React.Fragment key={i}>{item}</React.Fragment>
             ))}
           </h4>
+        );
+      case "code-block":
+        return (
+          <div>
+            {modifiedText.map((item, i) => (
+              <CopyBlock
+                key={i}
+                text={item}
+                theme={dracula}
+                showLineNumber={false}
+                wrapLines={true}
+                language="go"
+              />
+            ))}
+          </div>
         );
       case "image":
         return (
@@ -55,13 +80,14 @@ const PostDetails = ({ post }) => {
             src={obj.src}
           />
         );
+
       default:
         return modifiedText;
     }
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8">
+    <div className="post-details-bg shadow-lg rounded-lg lg:p-8 pb-12 mb-8">
       <div className="relative overflow-hidden shadow-md mb-6">
         <img
           src={post.featuredImage.url}
@@ -80,14 +106,14 @@ const PostDetails = ({ post }) => {
               width="30px"
               className="align-middle rounded-full"
             />
-            <p className="inline align-middle text-gray-700 ml-2 text-lg">
+            <p className="inline align-middle text-white ml-2 text-lg">
               {post.author.name}
             </p>
           </div>
-          <div className="font-medium text-gray-700 ">
+          <div className="font-medium text-white ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 inline mr-2 text-red-400"
+              className="h-6 w-6 inline mr-2 text-blue-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -103,13 +129,15 @@ const PostDetails = ({ post }) => {
           </div>
         </div>
 
-        <h1 className="mb-8 text-3xl font-semibold"> {post.title} </h1>
-        {post.content.raw.children.map((typeObj, index) => {
-          const children = typeObj.children.map((item, itemIndex) =>
-            getContentFragment(itemIndex, item.text, item)
-          );
-          return getContentFragment(index, children, typeObj, typeObj.type);
-        })}
+        <h1 className="mb-8 text-3xl font-semibold text-white">{post.title}</h1>
+        <div className="text-white">
+          {post.content.raw.children.map((typeObj, index) => {
+            const children = typeObj.children.map((item, itemIndex) =>
+              getContentFragment(itemIndex, item.text, item)
+            );
+            return getContentFragment(index, children, typeObj, typeObj.type);
+          })}
+        </div>
       </div>
     </div>
   );
