@@ -60,10 +60,13 @@ a {
 .category-bg,
 .recent-bg,
 .post-details-bg,
-.comment-bg,
-.bg-header {
+.comment-bg {
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(15px);
+}
+
+.bg-header {
+  background-color: #181818c8;
 }
 
 * {

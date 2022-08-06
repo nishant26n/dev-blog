@@ -12,7 +12,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-10 mb-8 lg:mt-5 bg-header lg:rounded-2xl">
+    <div className="container mx-auto px-10 lg:mt-5 lg:mb-8 bg-header lg:rounded-2xl">
       <div className="w-full inline-block py-8">
         <div className="md:float-left block text-center font-mono">
           <Link href="/">
