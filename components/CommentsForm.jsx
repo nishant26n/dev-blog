@@ -53,7 +53,7 @@ const CommentsForm = ({ slug }) => {
   };
 
   return (
-    <div className="comment-bg shadow-lg rounded-lg p-8 pb-12 mb-8">
+    <div className="comment-bg shadow-lg rounded-lg p-8 pb-12 mb-8 mx-5">
       <h1 className="text-white text-xl mb-8 font-semibold border-b pb-4">
         Leave a Reply
       </h1>
